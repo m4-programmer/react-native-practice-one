@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useRef, useState } from 'react';
+import { FlatList } from 'react-native';
 import { Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
@@ -7,11 +8,13 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const AddTask = () =>{
-    setTasks(task => {return [...task, inputValue]})
-    //we clear the input field
-    setInputValue('')
-    if (inputRef.current) {
-      inputRef.current.blur(); // Remove focus from the TextInput
+    if (inputValue) {
+      setTasks(task => {return [...task, inputValue]})
+      //we clear the input field
+      setInputValue('')
+      if (inputRef.current) {
+        inputRef.current.blur(); // Remove focus from the TextInput
+      }
     }
   }
   const handleInputChange = (text) => {
@@ -36,14 +39,26 @@ export default function App() {
         <View style={{borderWidth: 1, borderColor: 'grey', margin: 10}}></View>
         {/* Todo */}
         <Text>Total Todo: {tasks.length}</Text>
-        {tasks.map((task,key)=>{
-          return <Text key={key}>{task}</Text>
-        })}
+        <FlatList
+          data={tasks}
+          renderItem={({ item }) => <Item task={item} />} 
+          keyExtractor={(item, index) => index.toString()} 
+l
+        />
+      
       </View>
       <StatusBar style="dark" />
     </SafeAreaView>
   );
 }
+const Item = ({task}) => {
+  return (
+  <View style={styles.item}>
+    <Text style={styles.title}>{task}</Text>
+  </View>
+  )
+}
+  
 
 const styles = StyleSheet.create({
   container: {
@@ -66,5 +81,15 @@ const styles = StyleSheet.create({
     width: '20%',
     padding: 10,
     marginTop: 10,
-  }
+  },
+  item: {
+    backgroundColor: 'coral',
+    padding: 20,
+    marginVertical: 8,
+    
+  },
+  title: {
+    fontSize: 32,
+    color: 'white'
+  },
 });
