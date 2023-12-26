@@ -5,6 +5,7 @@ import { Button, SafeAreaView, StyleSheet, Text,  TouchableOpacity, View } from 
 import InputContainer from './components/InputContainer';
 import Todos from './components/Todos';
 import Title from './components/Title';
+import Divider from './components/Divider';
 
 export default function App() {
   const inputRef = useRef()
@@ -36,6 +37,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Title />
       <View style={{paddingHorizontal: 20,flex: 1}}>
+        
         <InputContainer 
           handleInputChange={handleInputChange}
           inputValue={inputValue}
@@ -45,7 +47,9 @@ export default function App() {
         {/* Validation Error */}
         {error && <Text style={styles.error}>{error}</Text>}
 
-        <View style={{borderWidth: 1, borderColor: 'grey', marginVertical: 10}}></View>
+        {/* Divider */}
+        <Divider width={.4} color='grey'/>
+
         {/* Todo's Section */}
         <Todos tasks={tasks} />
 
