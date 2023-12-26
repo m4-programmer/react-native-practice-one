@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
   const inputRef = useRef()
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState('');
   const AddTask = () =>{
     if (inputValue) {
@@ -16,7 +17,16 @@ export default function App() {
         inputRef.current.blur(); // Remove focus from the TextInput
       }
     }
+    else{
+      setError('Please enter a valid character');
+      setTimeout(() => {
+        setError('');
+      }, 2000);
+    }
+  
+    
   }
+  
   const handleInputChange = (text) => {
     setInputValue(text);
   };
@@ -39,6 +49,8 @@ export default function App() {
           </TouchableOpacity>
         </View>
         {/* End of input container */}
+        {/* Validation Error */}
+        {error && <Text style={styles.error}>{error}</Text>}
 
         <View style={{borderWidth: 1, borderColor: 'grey', margin: 10}}></View>
         {/* Todo */}
@@ -102,4 +114,10 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: 'white'
   },
+  error: {
+    fontSize: 14,
+    color: 'red',
+    paddingTop: 10,
+  },
+
 });
