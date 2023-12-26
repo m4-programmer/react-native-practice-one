@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Button, SafeAreaView, StyleSheet, Text,  TouchableOpacity, View } from 'react-native';
 import InputContainer from './components/InputContainer';
+import Todos from './components/Todos';
 
 export default function App() {
   const inputRef = useRef()
@@ -50,29 +51,14 @@ export default function App() {
         {error && <Text style={styles.error}>{error}</Text>}
 
         <View style={{borderWidth: 1, borderColor: 'grey', marginVertical: 10}}></View>
-        {/* Todo */}
-        <Text>Total Todo: {tasks.length}</Text>
-        <FlatList
-          data={tasks}
-          renderItem={({ item }) => <Item task={item} />} 
-          keyExtractor={(item, index) => index.toString()} 
-          alwaysBounceVertical={false}
-          showsVerticalScrollIndicator={false}
-l
-        />
+        <Todos tasks={tasks} />
       
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
-const Item = ({task}) => {
-  return (
-  <TouchableOpacity style={styles.item}>
-    <Text style={styles.title}>{task}</Text>
-  </TouchableOpacity>
-  )
-}
+
   
 
 const styles = StyleSheet.create({
@@ -89,11 +75,7 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   
-  item: {
-    backgroundColor: '#456',
-    padding: 5,
-    marginVertical: 5,
-  },
+  
   title: {
     fontSize: 32,
     color: 'white'
