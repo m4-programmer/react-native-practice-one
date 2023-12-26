@@ -32,7 +32,7 @@ export default function App() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>Basic Todo List</Text>
+      <Text style={styles.heading}><Text style={{color:'coral'}}>Ba</Text>sic <Text style={{color:'#209ac3'}}>Todo</Text> Li<Text style={{color:'#209ac3'}}>st</Text></Text>
       <View style={{paddingHorizontal: 20,flex: 1}}>
         {/* Input Container */}
         <View style={{flexDirection:'row',justifyContent: 'center',alignItems:'center'}}>
@@ -52,13 +52,15 @@ export default function App() {
         {/* Validation Error */}
         {error && <Text style={styles.error}>{error}</Text>}
 
-        <View style={{borderWidth: 1, borderColor: 'grey', margin: 10}}></View>
+        <View style={{borderWidth: 1, borderColor: 'grey', marginVertical: 10}}></View>
         {/* Todo */}
         <Text>Total Todo: {tasks.length}</Text>
         <FlatList
           data={tasks}
           renderItem={({ item }) => <Item task={item} />} 
           keyExtractor={(item, index) => index.toString()} 
+          alwaysBounceVertical={false}
+          showsVerticalScrollIndicator={false}
 l
         />
       
@@ -69,9 +71,9 @@ l
 }
 const Item = ({task}) => {
   return (
-  <View style={styles.item}>
+  <TouchableOpacity style={styles.item}>
     <Text style={styles.title}>{task}</Text>
-  </View>
+  </TouchableOpacity>
   )
 }
   
@@ -79,6 +81,8 @@ const Item = ({task}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ccd',
+    color: 'white'
   },
   heading: {
     textAlign: 'center',
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     borderStyle: 'solid',
-    borderWidth: 2,
+    borderWidth: 1,
     width: '80%',
     marginRight: 10,
     height: 40
@@ -105,10 +109,9 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   item: {
-    backgroundColor: 'coral',
-    padding: 20,
-    marginVertical: 8,
-    
+    backgroundColor: '#456',
+    padding: 5,
+    marginVertical: 5,
   },
   title: {
     fontSize: 32,
