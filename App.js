@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 import { Button, SafeAreaView, StyleSheet, Text,  TouchableOpacity, View } from 'react-native';
 import InputContainer from './components/InputContainer';
 import Todos from './components/Todos';
+import Title from './components/Title';
 
 export default function App() {
   const inputRef = useRef()
@@ -25,7 +26,6 @@ export default function App() {
         setError('');
       }, 2000);
     }
-  
     
   }
   
@@ -34,25 +34,21 @@ export default function App() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>
-        <Text style={{color:'coral'}}>Ba</Text>sic 
-        <Text style={{color:'#209ac3'}}>Todo</Text>
-         Li<Text style={{color:'#209ac3'}}>st</Text>
-      </Text>
+      <Title />
       <View style={{paddingHorizontal: 20,flex: 1}}>
         <InputContainer 
           handleInputChange={handleInputChange}
           inputValue={inputValue}
           inputRef={inputRef}
           AddTask={AddTask}
-
            />
         {/* Validation Error */}
         {error && <Text style={styles.error}>{error}</Text>}
 
         <View style={{borderWidth: 1, borderColor: 'grey', marginVertical: 10}}></View>
+        {/* Todo's Section */}
         <Todos tasks={tasks} />
-      
+
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -65,19 +61,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ccd',
-    color: 'white'
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: '700',
-    padding: 20,
-    marginTop: 15
-  },
-  
-  
-  title: {
-    fontSize: 32,
     color: 'white'
   },
   error: {

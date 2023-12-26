@@ -30,6 +30,9 @@ const Item = ({task}) => {
         backgroundColor: '#456',
         padding: 5,
         marginVertical: 5,
+      },
+      title: {
+        fontSize: 16,
         color: 'white'
       },
 });
