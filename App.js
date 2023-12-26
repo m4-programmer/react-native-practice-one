@@ -24,17 +24,21 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Basic Todo List</Text>
       <View style={{paddingHorizontal: 20,flex: 1}}>
+        {/* Input Container */}
+        <View style={{flexDirection:'row',justifyContent: 'center',alignItems:'center'}}>
           <TextInput 
-          style={styles.input}
-          placeholder='Enter to do ...'
-          onChangeText={handleInputChange}
-          value={inputValue}
-          ref={inputRef}
-          />
-        
-        <TouchableOpacity style={styles.button} onPress={AddTask}>
-          <Text style={{color: 'white',textAlign:'center'}}>Add</Text>
-        </TouchableOpacity>
+            style={styles.input}
+            placeholder='Enter to do ...'
+            onChangeText={handleInputChange}
+            value={inputValue}
+            ref={inputRef}
+            />
+          
+          <TouchableOpacity style={styles.button} onPress={AddTask}>
+            <Text style={{color: 'white',textAlign:'center'}}>Add</Text>
+          </TouchableOpacity>
+        </View>
+        {/* End of input container */}
 
         <View style={{borderWidth: 1, borderColor: 'grey', margin: 10}}></View>
         {/* Todo */}
@@ -68,19 +72,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: '700',
-    padding: 20
+    padding: 20,
+    marginTop: 15
   },
   input: {
     padding: 10,
     borderStyle: 'solid',
-    borderWidth: 2
+    borderWidth: 2,
+    width: '80%',
+    marginRight: 10,
+    height: 40
   },
   button: {
     backgroundColor: 'coral',
     color: 'white',
-    width: '20%',
+    width: '18%',
     padding: 10,
-    marginTop: 10,
+    borderRadius: 5,
+    height: 40,
+    fontWeight: '600'
   },
   item: {
     backgroundColor: 'coral',
