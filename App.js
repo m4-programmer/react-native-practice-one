@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
-import { Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, SafeAreaView, StyleSheet, Text,  TouchableOpacity, View } from 'react-native';
+import InputContainer from './components/InputContainer';
 
 export default function App() {
   const inputRef = useRef()
@@ -32,23 +33,19 @@ export default function App() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}><Text style={{color:'coral'}}>Ba</Text>sic <Text style={{color:'#209ac3'}}>Todo</Text> Li<Text style={{color:'#209ac3'}}>st</Text></Text>
+      <Text style={styles.heading}>
+        <Text style={{color:'coral'}}>Ba</Text>sic 
+        <Text style={{color:'#209ac3'}}>Todo</Text>
+         Li<Text style={{color:'#209ac3'}}>st</Text>
+      </Text>
       <View style={{paddingHorizontal: 20,flex: 1}}>
-        {/* Input Container */}
-        <View style={{flexDirection:'row',justifyContent: 'center',alignItems:'center'}}>
-          <TextInput 
-            style={styles.input}
-            placeholder='Enter to do ...'
-            onChangeText={handleInputChange}
-            value={inputValue}
-            ref={inputRef}
-            />
-          
-          <TouchableOpacity style={styles.button} onPress={AddTask}>
-            <Text style={{color: 'white',textAlign:'center'}}>Add</Text>
-          </TouchableOpacity>
-        </View>
-        {/* End of input container */}
+        <InputContainer 
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          inputRef={inputRef}
+          AddTask={AddTask}
+
+           />
         {/* Validation Error */}
         {error && <Text style={styles.error}>{error}</Text>}
 
@@ -65,7 +62,7 @@ l
         />
       
       </View>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
@@ -91,23 +88,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 15
   },
-  input: {
-    padding: 10,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    width: '80%',
-    marginRight: 10,
-    height: 40
-  },
-  button: {
-    backgroundColor: 'coral',
-    color: 'white',
-    width: '18%',
-    padding: 10,
-    borderRadius: 5,
-    height: 40,
-    fontWeight: '600'
-  },
+  
   item: {
     backgroundColor: '#456',
     padding: 5,
